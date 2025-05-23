@@ -1,0 +1,38 @@
+package java006_class.part09;
+
+public class Song {
+	String title;       //노래제목
+	String artist;      //가수
+	String album;       //앨범
+	String[] composer;  //작곡가
+	int year;           //년도
+	int track;          //트랙
+	
+	public Song(String title, String artist, String album, 
+				String[] composer, int year, int track) {		
+		this.title = title;
+		this.artist = artist;
+		this.album = album;
+		this.composer = composer;
+		this.year = year;
+		this.track = track;
+	}
+	
+	public void display() {
+		System.out.printf("노래제목: %s\n",title);
+		System.out.printf("가수: %s\n",artist);
+		System.out.printf("앨범: %s\n",album);
+		System.out.printf("작곡가: %s\n",getCom(composer));
+		System.out.printf("년도: %s\n",year);
+		System.out.printf("트랙: %s\n",track);
+	}
+	
+	public String getCom(String[] com) {
+		String cc = com[0];
+		
+		for(int i=1; i<com.length; i++) {
+			cc = cc + ", " + com[i];
+		}
+		return cc;
+	}
+}//end class
