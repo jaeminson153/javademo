@@ -19,6 +19,19 @@ public class UserTest {
 		// users 가 참조하는 객체들의 복사본을 만든다. - for 문을 이용 할 것
 		// copyUsers 의 객체 정보를 모두 출력한다 – for each 문을 이용할 것
 		// users 와 copyUsers 의 각 index 별 객체의 값들이 일치하는지 확인 출력한다.
+		for(int i = 0 ; i < users.length ; i++) {
+			copyUsers[i] = (User)users[i].clone(); 
+		}
+		
+		System.out.println("copyUsers ---------------------------------");
+		for(User data : copyUsers) {
+			System.out.println(data.toString());
+		}	
+		
+		System.out.println("비교결과 ---------------------------------");
+		for(int i = 0 ; i<users.length ; i++) {
+			System.out.println(copyUsers[i].Booleanequals(users[i]));
+		}		
 
 	}
 

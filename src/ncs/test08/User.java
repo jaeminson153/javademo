@@ -27,11 +27,12 @@ public class User {
 	} 
 	
 	public boolean Booleanequals(Object obj) {
-		return false;
+		return ((User)obj).toString().equals(toString());
 	}
 	
 	public Object clone() {
-		return null;
+		User obj = new User(id,password,name,age,gender,phone);
+		return obj;
 	}
 
 	public String getId() {
