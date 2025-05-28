@@ -22,8 +22,7 @@ public class ProbTest {
 		fileSave(prop);
 
 		// fileOpen() 메소드를 호출한다.
-		fileOpen(prop);
-			
+		fileOpen(prop);			
 
 	}
 
