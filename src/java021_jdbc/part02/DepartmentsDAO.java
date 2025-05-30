@@ -1,6 +1,7 @@
 package java021_jdbc.part02;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,8 +30,42 @@ public class DepartmentsDAO {
 		
 		try {
 			stmt = conn.createStatement();
-			String sql = "select * from departments order by department_id";
+			String sql = "select * from departments order by department_id";			
 			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				DepartmentsDTO dto = new DepartmentsDTO();
+				dto.setDepartment_id(rs.getInt("department_id"));
+				dto.setDepartment_name(rs.getString("department_name"));
+				dto.setManager_id(rs.getInt("manager_id"));
+				dto.setLocaton_id(rs.getInt("location_id"));				
+				aList.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(stmt);			
+		}
+		
+		return aList;
+	}
+	
+	public List<DepartmentsDTO> getSearchMethod(Connection conn, String search){
+		List<DepartmentsDTO> aList = new ArrayList<DepartmentsDTO>();
+		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+//			stmt = conn.createStatement();
+//			String sql = "select * from departments where department_name like '%" + search + "%' order by department_id";
+//			rs = stmt.executeQuery(sql);
+			
+			String sql = "select * from departments where department_name like ? order by department_id";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, '%' + search + '%');
+			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				DepartmentsDTO dto = new DepartmentsDTO();
 				dto.setDepartment_id(rs.getInt("department_id"));

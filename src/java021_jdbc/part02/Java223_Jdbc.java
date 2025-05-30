@@ -1,6 +1,7 @@
 package java021_jdbc.part02;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Java223_Jdbc {
 	/*
@@ -15,8 +16,25 @@ public class Java223_Jdbc {
 		DepartmentsController dController = new DepartmentsController();
 		
 		List<DepartmentsDTO> aList = null;
-		aList = dController.listProcess();
-		display(aList);
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			System.out.print("1 전체, 2 검색어, 3.종료 :");
+			
+			int input = Integer.parseInt(sc.nextLine());
+			if(input == 1) {
+				aList = dController.listProcess();	
+			}else if(input == 2) {
+				System.out.print("부서명 입력 :");
+				String search = sc.nextLine();
+				aList = dController.listSearchProcess(search);
+			}else {
+				System.out.println("프로그램이 종료되었습니다.");
+				break;
+			}			
+					
+			display(aList);
+		}
+		sc.close();
 	}
 	
 	public static void display(List<DepartmentsDTO> aList) {
